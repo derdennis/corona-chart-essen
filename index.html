@@ -7,10 +7,11 @@
     <style>
 
 	    html, body {
-		    margin: 0;
-		    padding: 0;
+		    margin: 100;
+		    padding: 200;
 		    height: 100%;
 		    width: 100%;
+			height: auto;
 	    }
 
 	    text {
@@ -18,6 +19,12 @@
 		    font-size: 12px;
 	    }
 
+		#chart {
+			border-style: none;
+			border-width:thin;
+			border-color:#000;
+			height: 500px;
+		}
 
 	    path.line {
 		    fill: none;
@@ -35,13 +42,20 @@
   </head>
   <body>
 
+<div>
 <h1>Corona Cases in Essen</h1>
-Current Corona Cases in Essen, Germany as of 2020-03-20, 17:25: 176.
+Current <a href="https://en.wikipedia.org/wiki/2019–20_coronavirus_pandemic">Corona</a> Cases in <a href="https://en.wikipedia.org/wiki/Essen">Essen, Germany</a> as of 2020-03-20, 17:25: 176.
+</div>
 
+<div>
 	<h2>Data Source</h2>
-
-	All data via: <a href="https://www.essen.de/gesundheit/coronavirus_aktuell.de.html">Aktuelle Entwicklungen rund um das Coronavirus in Essen</a>
-
+	<p>
+	All data via: <a href="https://www.essen.de/gesundheit/coronavirus_aktuell.de.html">Aktuelle Entwicklungen rund um das Coronavirus in Essen</a>.
+	</p>
+	<p>
+	All source code availabe on <a href="https://github.com/derdennis/corona-chart-essen">GitHub</a>.
+	</p>
+</div>
 <script type="text/javascript">
 
 var parseDate = d3.timeParse("%Y-%m-%d");
@@ -85,7 +99,7 @@ d3.csv("cases.csv")
 			.curve(d3.curveCardinal);
 
 
-		var svg = d3.select("body").append("svg").attr("id","svg").attr("height","100%").attr("width","100%");
+		var svg = d3.select("#chart").append("svg").attr("id","svg").attr("height","100%").attr("width","100%");
 		var chartGroup = svg.append("g").attr("class","chartGroup").attr("transform","translate("+xNudge+","+yNudge+")");
 
 		chartGroup.append("path")
@@ -106,5 +120,17 @@ d3.csv("cases.csv")
 
 	});
 	</script>
+<div id="chart">
+
+</div>
+
+<div id="table">
+	<h2>Data Table</h2>
+	Tableplaceholder
+</div>
+
+
+
+
   </body>
 </html>
