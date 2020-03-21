@@ -41,12 +41,12 @@
 
 		table {
                 border-collapse: collapse;
-                border: 2px black solid;
+                border: none;
                 font: 12px sans-serif;
             }
 
             td {
-                border: 1px black solid;
+                border-bottom: 1px black solid;
                 padding: 5px;
             }
 
@@ -68,124 +68,12 @@ Current <a href="https://en.wikipedia.org/wiki/2019–20_coronavirus_pandemic">C
 	All source code availabe on <a href="https://github.com/derdennis/corona-chart-essen">GitHub</a>.
 	</p>
 </div>
-<script type="text/javascript">
 
-var parseDate = d3.timeParse("%Y-%m-%d");
-
-var margin = {left: 50, right: 20, top: 20, bottom: 50 };
-
-var width = 800 - margin.left - margin.right;
-var height = 500 - margin.top - margin.bottom;
-
-var max = 0;
-
-var xNudge = 50;
-var yNudge = 20;
-
-var minDate = new Date();
-var maxDate = new Date();
-
-d3.csv("cases.csv")
-    .row(function(d) { return { date: parseDate(d.date), cases: Number(d.cases)}; })
-    .get(function(error, rows) {
-	    max = d3.max(rows, function(d) { return d.cases; });
-	    minDate = d3.min(rows, function(d) {return d.date; });
-		maxDate = d3.max(rows, function(d) { return d.date; });
-
-
-		var y = d3.scaleLinear()
-					.domain([0,max])
-					.range([height,0]);
-
-		var x = d3.scaleTime()
-					.domain([minDate,maxDate])
-					.range([0,width]);
-
-		var yAxis = d3.axisLeft(y);
-
-		var xAxis = d3.axisBottom(x);
-
-		var line = d3.line()
-			.x(function(d){ return x(d.date); })
-			.y(function(d){ return y(d.cases); })
-			.curve(d3.curveCardinal);
-
-
-		var svg = d3.select("#chart").append("svg").attr("id","svg").attr("height","100%").attr("width","100%");
-		var chartGroup = svg.append("g").attr("class","chartGroup").attr("transform","translate("+xNudge+","+yNudge+")");
-
-		chartGroup.append("path")
-			.attr("class","line")
-			.attr("d",function(d){ return line(rows); })
-
-
-		chartGroup.append("g")
-			.attr("class","axis x")
-			.attr("transform","translate(0,"+height+")")
-			.call(xAxis);
-
-		chartGroup.append("g")
-			.attr("class","axis y")
-			.call(yAxis);
-
-	});
-	</script>
-
-<script>
-	// Get the data
-	d3.csv("cases.csv", function(error, data) {
-	  if (error) throw error;
-
-	// The table generation function
-	function tabulate(data, columns) {
-		var table = d3.select("#table").append("table")
-				.attr("style", "margin-left: 400px"),
-			thead = table.append("thead"),
-			tbody = table.append("tbody");
-	
-		// append the header row
-		thead.append("tr")
-			.selectAll("th")
-			.data(columns)
-			.enter()
-			.append("th")
-				.text(function(column) { return column; });
-	
-		// create a row for each object in the data
-		var rows = tbody.selectAll("tr")
-			.data(data)
-			.enter()
-			.append("tr");
-	
-		// create a cell in each row for each column
-		var cells = rows.selectAll("td")
-			.data(function(row) {
-				return columns.map(function(column) {
-					return {column: column, value: row[column]};
-				});
-			})
-			.enter()
-			.append("td")
-			.attr("style", "font-family: Courier") // sets the font style
-				.html(function(d) { return d.value; });
-		
-		return table;
-	}
-	
-	// render the table
-	 var casesTable = tabulate(data, ["date", "cases"]);
-	
-	});
-	
-	</script>
-
+<script type="text/javascript" src="corona-essen-linechart.js"></script>
 <div id="chart"><h2>Chart</h2></div>
 
-
+<script type="text/javascript" src="corona-essen-table.js"></script>
 <div id="table"><h2>Table</h2></div>
-
-
-
 
 </body>
 </html>
