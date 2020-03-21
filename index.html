@@ -1,79 +1,87 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>Corona Cases in Essen</title>
     <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
     <style>
+        html,
+        body {
+            margin: 100;
+            padding: 200;
+            height: 100%;
+            width: 100%;
+            height: auto;
+        }
 
-	    html, body {
-		    margin: 100;
-		    padding: 200;
-		    height: 100%;
-		    width: 100%;
-			height: auto;
-	    }
+        text {
+            font-family: arial;
+            font-size: 12px;
+        }
 
-	    text {
-		    font-family: arial;
-		    font-size: 12px;
-	    }
+        #chart {
+            border-style: none;
+            border-width: thin;
+            border-color: #000;
+            height: 500px;
+        }
 
-		#chart {
-			border-style: none;
-			border-width:thin;
-			border-color:#000;
-			height: 500px;
-		}
+        path.line {
+            fill: none;
+            stroke: red;
+            stroke-width: 3px;
+        }
 
-	    path.line {
-		    fill: none;
-		    stroke: red;
-		    stroke-width: 3px;
-	    }
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: slategray;
+            shape-rendering: crispEdges;
+        }
 
-		.axis path,
-		.axis line {
-		  fill: none;
-		  stroke: slategray;
-		  shape-rendering: crispEdges;
-		}
+        table {
+            border-collapse: collapse;
+            border: none;
+            font: 12px sans-serif;
+        }
 
-		table {
-                border-collapse: collapse;
-                border: none;
-                font: 12px sans-serif;
-            }
-
-            td {
-                border-bottom: 1px black solid;
-                padding: 5px;
-            }
-
+        td {
+            border-bottom: 1px black solid;
+            padding: 5px;
+        }
     </style>
-  </head>
-  <body>
+</head>
 
-<div>
-<h1>Corona Cases in Essen</h1>
-Current <a href="https://en.wikipedia.org/wiki/2019–20_coronavirus_pandemic">Corona</a> Cases in <a href="https://en.wikipedia.org/wiki/Essen">Essen, Germany</a> as of 2020-03-20, 17:25: 176.
-</div>
+<body>
 
-<div>
-	<h2>Data Source</h2>
-	<p>
-	All data via: <a href="https://www.essen.de/gesundheit/coronavirus_aktuell.de.html">Aktuelle Entwicklungen rund um das Coronavirus in Essen</a>.
-	</p>
-	<p>
-	All source code availabe on <a href="https://github.com/derdennis/corona-chart-essen">GitHub</a>.
-	</p>
-</div>
+    <div>
+        <h1>Corona Cases in Essen</h1>
+        Current <a href="https://en.wikipedia.org/wiki/2019–20_coronavirus_pandemic">Corona</a> Cases in <a
+            href="https://en.wikipedia.org/wiki/Essen">Essen, Germany</a> as of 2020-03-20, 17:25: 176.
+    </div>
 
-<script type="text/javascript" src="corona-essen-linechart.js"></script>
-<div id="chart"><h2>Chart</h2></div>
+    <div>
+        <h2>Data Source</h2>
+        <p>
+            All data via: <a href="https://www.essen.de/gesundheit/coronavirus_aktuell.de.html">Aktuelle Entwicklungen
+                rund um das Coronavirus in Essen</a>.
+        </p>
+        <p>
+            All source code availabe on <a href="https://github.com/derdennis/corona-chart-essen">GitHub</a>.
+        </p>
+    </div>
 
-<script type="text/javascript" src="corona-essen-table.js"></script>
-<div id="table"><h2>Table</h2></div>
+    <script type="text/javascript" src="corona-essen-linechart.js"></script>
+    <div id="chart">
+        <h2>Chart</h2>
+    </div>
+
+    <script type="text/javascript" src="corona-essen-table.js"></script>
+    <div id="table">
+        <h2>Table</h2>
+    </div>
 
 </body>
+
 </html>
