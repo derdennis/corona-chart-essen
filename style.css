@@ -1,0 +1,44 @@
+html,
+body {
+    margin: 100;
+    padding: 200;
+    height: 100%;
+    width: 100%;
+    height: auto;
+}
+
+text {
+    font-family: arial;
+    font-size: 12px;
+}
+
+#chart {
+    border-style: none;
+    border-width: thin;
+    border-color: #000;
+    height: 500px;
+}
+
+path.line {
+    fill: none;
+    stroke: red;
+    stroke-width: 3px;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: slategray;
+    shape-rendering: crispEdges;
+}
+
+table {
+    border-collapse: collapse;
+    border: none;
+    font: 12px sans-serif;
+}
+
+td {
+    border-bottom: 1px black solid;
+    padding: 5px;
+}
