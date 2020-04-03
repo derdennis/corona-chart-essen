@@ -8,10 +8,10 @@
 <div id="my_dataviz"></div>
 
 <script>
-
+var parseDate = d3.timeParse("%Y-%m-%d");
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 460 - margin.left - margin.right,
+    width = 860 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
@@ -29,7 +29,8 @@ d3.csv("https://raw.githubusercontent.com/ruedigerp/corona-chart-essen/master/ca
 
   // When reading the csv, I must format variables:
   function(d){
-    return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
+    // return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
+    return { date : parseDate(d.date), value : d.value }
   },
 
   // Now I can use this dataset:
