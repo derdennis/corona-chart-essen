@@ -7,7 +7,7 @@ var margin = {
 	bottom: 50
 };
 
-var width = 400 - margin.left - margin.right;
+var width = 800 - margin.left - margin.right;
 var height = 400 - margin.top - margin.bottom;
 
 var max = 0;
