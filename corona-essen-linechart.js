@@ -11,7 +11,7 @@ var width = 800 - margin.left - margin.right;
 var height = 400 - margin.top - margin.bottom;
 
 var max = 0;
-
+ 
 var xNudge = 50;
 var yNudge = 20;
 
