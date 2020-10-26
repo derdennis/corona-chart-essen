@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Corona Cases in Essen</title>
+	<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+	<link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+
+    <div>
+        <h1>Corona Cases in Essen</h1>
+        Current <a href="https://en.wikipedia.org/wiki/2019–20_coronavirus_pandemic">Corona</a> Cases in <a
+            href="https://en.wikipedia.org/wiki/Essen">Essen, Germany</a> as of PLEASE_REPLACE_ME_WITH_CURRENT_DATA
+    </div>
+
+    <div>
+        <h2>Data Source</h2>
+        <p>
+            All data via: <a href="https://www.essen.de/leben/gesundheit/corona_virus/coronavirus_updates.de.html">Aktuelle Entwicklungen
+                rund um das Coronavirus in Essen</a>.
+        </p>
+        <p>
+            All source code availabe on <a href="https://github.com/derdennis/corona-chart-essen">GitHub</a>.
+        </p>
+    </div>
+
+    <script type="text/javascript" src="corona-essen-linechart.js"></script>
+    <div id="chart">
+        <h2>Chart</h2>
+    </div>
+
+    <script type="text/javascript" src="corona-essen-table.js"></script>
+    <div id="table">
+        <h2>Table</h2>
+    </div>
+
+</body>
+
+</html>
