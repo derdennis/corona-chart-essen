@@ -53,7 +53,7 @@ page.css('p').each{ |p|
 		#puts p.text
 		# We search for the number of todays cases and store it in a named
 		# matching group
-		result = /sind in Essen \D*(?<number>\d*) Personen/.match(p.text)
+		result = /sind in Essen \D*(?<number>\d*\.*\d*) Personen/.match(p.text)
 		unless result.nil?
 			# If we are here, we found a result and we store the number in an instance variable
 			@current_corona_cases = result["number"]
