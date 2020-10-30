@@ -55,7 +55,7 @@ page.css('p').each{ |p|
 		# matching group
 		result = /sind in Essen \D*(?<number>\d*) Personen/.match(p.text)
 		unless result.nil?
-			# If we are here, we found a result and we store the number in a constant
+			# If we are here, we found a result and we store the number in an instance variable
 			@current_corona_cases = result["number"]
 			# We also store the date and time from the bold heading
 			@current_date_and_time = DateTime.parse(p.css('b').text).strftime("%Y-%m-%d, %H:%M")
@@ -96,5 +96,7 @@ unless @current_corona_cases.nil?
 			f.puts new_contents
 		}
 	end # end if/else
+else
+	puts "Heute (#{todays_date_german}) noch keine neuen Zahlen online."
 end # end unless
 exit
