@@ -36,7 +36,8 @@ def which(cmd)
 end
 
 # Setting the current cases to nil
-@current_corona_cases = nil
+@current_corona_cases_csv = nil
+@current_corona_cases_html = nil
 # Getting the website into Nokogiri
 page                = Nokogiri::HTML(open(CORONA_UPDATES_IN_ESSEN))
 # Getting todays date in the two required formats
@@ -47,28 +48,28 @@ todays_date_iso     = Time.now.strftime("%Y-%m-%d")
 
 # Getting all paragraphs from the website, stepping through them
 page.css('p').each{ |p|
-
 	# We are interested in paragraphs with bold headings, starting with todays date
-	if p.css('b').text.start_with?(todays_date_german)
-		#puts p.text
+	if p.css('strong').text.start_with?(todays_date_german)
 		# We search for the number of todays cases and store it in a named
 		# matching group
 		result = /sind in Essen \D*(?<number>\d*\.*\d*) Personen/.match(p.text)
 		unless result.nil?
-			# If we are here, we found a result and we store the number in an instance variable
-			@current_corona_cases = result["number"]
+			# If we are here, we found a result and we store the number in instance variables,
+			# removing the thousands seperator for our csv in the process
+			@current_corona_cases_csv = result["number"].delete('^0-9')
+			@current_corona_cases_html = result["number"]
 			# We also store the date and time from the bold heading
-			@current_date_and_time = DateTime.parse(p.css('b').text).strftime("%Y-%m-%d, %H:%M")
+			@current_date_and_time = DateTime.parse(p.css('strong').text).strftime("%Y-%m-%d, %H:%M")
 		end
 	end
 }
 
 # If we filled the instance variable, we proceed here
-unless @current_corona_cases.nil?
+unless @current_corona_cases_csv.nil?
 	# This is the new line for the csv
-	csv_line  = "#{todays_date_iso},#{@current_corona_cases}"
+	csv_line  = "#{todays_date_iso},#{@current_corona_cases_csv}"
 	# This is the new part of the html page
-	html_text = "#{@current_date_and_time}: #{@current_corona_cases}."
+	html_text = "#{@current_date_and_time}: #{@current_corona_cases_html}."
 	#p csv_line
 	#p html_text
 
@@ -78,9 +79,9 @@ unless @current_corona_cases.nil?
 		last_line = line if(!line.chomp.empty?)
 	end
 	if last_line.start_with?(todays_date_iso)
-		puts "Den Wert #{@current_corona_cases} vom #{todays_date_german} haben wir schon notiert."
+		puts "Den Wert #{@current_corona_cases_html} vom #{todays_date_german} haben wir schon notiert."
 	else
-		puts "Wir notieren #{@current_corona_cases} vom #{todays_date_german} in HTML und CSV."
+		puts "Wir notieren #{@current_corona_cases_html} vom #{todays_date_german} in HTML und CSV."
 
 		# If we are here we append the new csv line to the csv file
 		File.open('cases.csv', 'a') { |f|
