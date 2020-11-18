@@ -52,7 +52,7 @@ page.css('p').each{ |p|
 	if p.css('strong').text.start_with?(todays_date_german)
 		# We search for the number of todays cases and store it in a named
 		# matching group
-		result = /sind in Essen \D*(?<number>\d*\.*\d*) Personen/.match(p.text)
+		result = /(sind|haben) in Essen \D*(?<number>\d*\.*\d*) Personen/.match(p.text)
 		unless result.nil?
 			# If we are here, we found a result and we store the number in instance variables,
 			# removing the thousands seperator for our csv in the process
