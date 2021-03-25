@@ -38,6 +38,8 @@ end
 # Setting the current cases to nil
 @current_corona_cases_csv = nil
 @current_corona_cases_html = nil
+@current_vaccinations_csv = nil
+@current_vaccinations_html = nil
 # Getting the website into Nokogiri
 page                = Nokogiri::HTML(open(CORONA_UPDATES_IN_ESSEN))
 # Getting todays date in the two required formats
@@ -52,22 +54,26 @@ page.css('p').each{ |p|
 	if p.css('strong').text.start_with?(todays_date_german)
 		# We search for the number of todays cases and store it in a named
 		# matching group
-		result = /(sind|haben) in Essen \D*(?<number>\d*\.*\d*) Personen/.match(p.text)
-		unless result.nil?
-			# If we are here, we found a result and we store the number in instance variables,
+		cases_result = /(sind|haben) in Essen \D*(?<number>\d*\.*\d*) Personen/.match(p.text)
+		vaccinations_result = /(?<number>\d*\.*\d*) (Schutzimpfungen gegen das Coronavirus wurden|Personen wurden bisher gegen das Coronavirus in Essen geimpft)/.match(p.text)
+		unless cases_result.nil?
+			# If we are here, we found a result for cases and we store the numbers 
+			# for cases and vaccinations in instance variables,
 			# removing the thousands seperator for our csv in the process
-			@current_corona_cases_csv = result["number"].delete('^0-9')
-			@current_corona_cases_html = result["number"]
+			@current_corona_cases_csv = cases_result["number"].delete('^0-9')
+			@current_corona_cases_html = cases_result["number"]
+			@current_vaccinations_csv = vaccinations_result["number"].delete('^0-9')
+			@current_vaccinations_html = vaccinations_result["number"]
 			# We also store the date and time from the bold heading
 			@current_date_and_time = DateTime.parse(p.css('strong').text).strftime("%Y-%m-%d, %H:%M")
 		end
 	end
 }
 
-# If we filled the instance variable, we proceed here
+# If we filled the instance variable for cases, we proceed here
 unless @current_corona_cases_csv.nil?
 	# This is the new line for the csv
-	csv_line  = "#{todays_date_iso},#{@current_corona_cases_csv}"
+	csv_line  = "#{todays_date_iso},#{@current_corona_cases_csv},#{@current_vaccinations_csv}"
 	# This is the new part of the html page
 	html_text = "#{@current_date_and_time}: #{@current_corona_cases_html}."
 	#p csv_line
@@ -79,9 +85,9 @@ unless @current_corona_cases_csv.nil?
 		last_line = line if(!line.chomp.empty?)
 	end
 	if last_line.start_with?(todays_date_iso)
-		puts "Den Wert #{@current_corona_cases_html} vom #{todays_date_german} haben wir schon notiert."
+		puts "Die Werte #{@current_corona_cases_html} Fälle und #{@current_vaccinations_html} Impfungen vom #{todays_date_german} haben wir schon notiert."
 	else
-		puts "Wir notieren #{@current_corona_cases_html} vom #{todays_date_german} in HTML und CSV."
+		puts "Wir notieren #{@current_corona_cases_html} Fälle und #{@current_vaccinations_html} Impfungen vom #{todays_date_german} in HTML und CSV."
 
 		# If we are here we append the new csv line to the csv file
 		File.open('cases.csv', 'a') { |f|
