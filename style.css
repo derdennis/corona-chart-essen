@@ -12,11 +12,24 @@ text {
     font-size: 12px;
 }
 
-#chart {
+#coronachart {
     border-style: none;
     border-width: thin;
     border-color: #000;
     height: 500px;
+}
+
+#vaccinationschart {
+    border-style: none;
+    border-width: thin;
+    border-color: #000;
+    height: 500px;
+}
+
+path.vline {
+    fill: none;
+    stroke: blue;
+    stroke-width: 3px;
 }
 
 path.line {

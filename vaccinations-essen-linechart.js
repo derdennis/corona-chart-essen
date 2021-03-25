@@ -22,7 +22,7 @@ d3.csv("cases.csv")
 	.row(function (d) {
 		return {
 			date: parseDate(d.date),
-			cases: Number(d.cases)
+			cases: Number(d.vaccinations)
 		};
 	})
 	.get(function (error, rows) {
@@ -63,7 +63,7 @@ d3.csv("cases.csv")
 		var chartGroup = svg.append("g").attr("class", "chartGroup").attr("transform", "translate(" + xNudge + "," + yNudge + ")");
 
 		chartGroup.append("path")
-			.attr("class", "line")
+			.attr("class", "vline")
 			.attr("d", function (d) {
 				return line(rows);
 			})
