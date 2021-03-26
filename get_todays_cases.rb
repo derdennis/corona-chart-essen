@@ -40,6 +40,7 @@ end
 @current_corona_cases_html = nil
 @current_vaccinations_csv = nil
 @current_vaccinations_html = nil
+@population_in_essen = 591032
 # Getting the website into Nokogiri
 page                = Nokogiri::HTML(open(CORONA_UPDATES_IN_ESSEN))
 # Getting todays date in the two required formats
@@ -76,6 +77,8 @@ unless @current_corona_cases_csv.nil?
 	csv_line  = "#{todays_date_iso},#{@current_corona_cases_csv},#{@current_vaccinations_csv}"
 	# This is the new part of the html page
 	html_text = "#{@current_date_and_time}: #{@current_corona_cases_html}."
+	vacc_count = "#{@current_vaccinations_html}"
+	vacc_percent = (@current_vaccinations_csv.to_f / @population_in_essen.to_f * 100).round(2).to_s
 	#p csv_line
 	#p html_text
 
@@ -97,7 +100,7 @@ unless @current_corona_cases_csv.nil?
 		# And we write a new html file by filling in the template and writing it
 		# out to the html file.
 		text = File.read('index.html.template')
-		new_contents = text.gsub(/PLEASE_REPLACE_ME_WITH_CURRENT_DATA/, html_text)
+		new_contents = text.gsub(/PLEASE_REPLACE_ME_WITH_CURRENT_DATA/, html_text).gsub(/PLEASE_INSERT_CURRENT_VACCS_HERE/, vacc_count).gsub(/PLEASE_INSERT_CURRENT_VACC_PERCENTAGE_HERE/, vacc_percent)
 
 		File.open('index.html', "w") {|f|
 			f.puts new_contents
