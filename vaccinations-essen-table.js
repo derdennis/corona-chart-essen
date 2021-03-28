@@ -46,6 +46,6 @@ d3.csv("cases.csv", function (error, data) {
     }
 
     // render the table
-    var casesTable = tabulate(data, ["date", "vaccinations"]);
+    var casesTable = tabulate(data, ["date", "vaccinations", "vaccinated % of population"]);
 
 });

@@ -73,12 +73,12 @@ page.css('p').each{ |p|
 
 # If we filled the instance variable for cases, we proceed here
 unless @current_corona_cases_csv.nil?
-	# This is the new line for the csv
-	csv_line  = "#{todays_date_iso},#{@current_corona_cases_csv},#{@current_vaccinations_csv}"
 	# This is the new part of the html page
 	html_text = "#{@current_date_and_time}: #{@current_corona_cases_html}."
 	vacc_count = "#{@current_vaccinations_html}"
 	vacc_percent = (@current_vaccinations_csv.to_f / @population_in_essen.to_f * 100).round(2).to_s
+	# This is the new line for the csv
+	csv_line  = "#{todays_date_iso},#{@current_corona_cases_csv},#{@current_vaccinations_csv},#{vacc_percent}"
 	#p csv_line
 	#p html_text
 
