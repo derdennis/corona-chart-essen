@@ -17,6 +17,7 @@ require "rubygems"
 require "nokogiri"
 require "open-uri"
 require "fileutils"
+require "clipboard"
 
 # Where do we find the website and where are we located in the filesystem?
 CORONA_UPDATES_IN_ESSEN = "https://www.essen.de/leben/gesundheit/corona_virus/coronavirus_updates.de.html"
@@ -105,6 +106,10 @@ unless @current_corona_cases_csv.nil?
 		File.open('index.html', "w") {|f|
 			f.puts new_contents
 		}
+
+		# And we put a nice commit line in our clipboard
+		commit_line = "g ci -am \"Now at #{@current_corona_cases_html} cases and #{@current_vaccinations_html} vaccinations.\""
+		Clipboard.copy(commit_line)
 	end # end if/else
 else
 	puts "Heute (#{todays_date_german}) noch keine neuen Zahlen online."
