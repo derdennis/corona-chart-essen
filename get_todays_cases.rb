@@ -57,7 +57,7 @@ page.css('p').each{ |p|
 		# We search for the number of todays cases and store it in a named
 		# matching group
 		cases_result = /(sind|haben) in Essen \D*(?<number>\d*\.*\d*) Personen/.match(p.text)
-		vaccinations_result = /(?<number>\d*\.*\d*) (Schutzimpfungen gegen das Coronavirus wurden|Personen wurden bisher gegen das Coronavirus in Essen geimpft)/.match(p.text)
+		vaccinations_result = /(?<number>\d*\.*\d*) (Schutzimpfungen gegen das Coronavirus wurden|Personen wurden bisher( im Impfzentrum Essen)? gegen das Coronavirus in Essen geimpft)/.match(p.text)
 		unless cases_result.nil?
 			# If we are here, we found a result for cases and we store the numbers 
 			# for cases and vaccinations in instance variables,
