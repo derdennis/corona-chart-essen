@@ -41,7 +41,7 @@ end
 @current_corona_cases_html = nil
 @current_vaccinations_csv = nil
 @current_vaccinations_html = nil
-@population_in_essen = 591032
+@population_in_essen = 588812
 # Getting the website into Nokogiri
 page                = Nokogiri::HTML(open(CORONA_UPDATES_IN_ESSEN))
 # Getting todays date in the two required formats
