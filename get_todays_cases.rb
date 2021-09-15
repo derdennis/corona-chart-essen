@@ -67,7 +67,8 @@ page.css('p').each{ |p|
 			@current_vaccinations_csv = vaccinations_result["number"].delete('^0-9')
 			@current_vaccinations_html = vaccinations_result["number"]
 			# We also store the date and time from the bold heading
-			@current_date_and_time = DateTime.parse(p.css('strong').text).strftime("%Y-%m-%d, %H:%M")
+			#@current_date_and_time = DateTime.parse(p.css('strong').text).strftime("%Y-%m-%d, %H:%M")
+			@current_date_and_time = DateTime.parse("15.09.2021, 9:45").strftime("%Y-%m-%d, %H:%M")
 		end
 	end
 }
