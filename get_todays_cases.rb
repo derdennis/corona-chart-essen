@@ -47,8 +47,8 @@ page                = Nokogiri::HTML(open(CORONA_UPDATES_IN_ESSEN))
 # Getting todays date in the two required formats
 todays_date_german  = Time.now.strftime("%d.%m.%Y")
 todays_date_iso     = Time.now.strftime("%Y-%m-%d")
-#todays_date_german  = "19.07.2021"
-#todays_date_iso     = "2021-07-19"
+#todays_date_german  = "01.10.2021"
+#todays_date_iso     = "2021-10-01"
 
 # Getting all paragraphs from the website, stepping through them
 page.css('p').each{ |p|
@@ -57,7 +57,8 @@ page.css('p').each{ |p|
 		# We search for the number of todays cases and store it in a named
 		# matching group
 		cases_result = /(sind|haben) in Essen \D*(?<number>\d*\.*\d*) Personen/.match(p.text)
-		vaccinations_result = /(?<number>\d*\.*\d*) (Schutzimpfungen gegen das Coronavirus wurden|Personen wurden bisher( im Impfzentrum Essen)? gegen das Coronavirus in Essen geimpft|Personen in Essen gegen das Coronavirus geimpft|Personen, die in Essen gegen das Coronavirus geimpft sind)/.match(p.text)
+		vaccinations_result = /(?<number>\d*\.*\d*) (Schutzimpfungen gegen das Coronavirus wurden|Personen sind .* in Essen gegen das Coronavirus geimpft|Personen sind entsprechend in Essen gegen das Coronavirus geimpft|Personen wurden bisher( im Impfzentrum Essen)? gegen das Coronavirus in Essen geimpft|Personen in Essen gegen das Coronavirus geimpft|Personen, die in Essen gegen das Coronavirus geimpft sind)/.match(p.text)
+		p vaccinations_result
 		unless cases_result.nil?
 			# If we are here, we found a result for cases and we store the numbers 
 			# for cases and vaccinations in instance variables,
