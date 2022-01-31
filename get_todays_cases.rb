@@ -56,7 +56,7 @@ page.css('p').each{ |p|
 	if p.css('strong').text.start_with?(todays_date_german)
 		# We search for the number of todays cases and store it in a named
 		# matching group
-		cases_result = /(sind|haben) in Essen \D*(?<number>\d*\.*\d*) Personen/.match(p.text)
+		cases_result = /(sind|haben|gibt es) in Essen \D*(?<number>\d*\.*\d*) (Personen|registrierte Corona-Fälle)/.match(p.text)
 		vaccinations_result = /(?<number>\d*\.*\d*) (Schutzimpfungen gegen das Coronavirus wurden|Personen sind .* in Essen gegen das Coronavirus geimpft|Personen sind entsprechend in Essen gegen das Coronavirus geimpft|Personen wurden bisher( im Impfzentrum Essen)? gegen das Coronavirus in Essen geimpft|Personen in Essen gegen das Coronavirus geimpft|Personen, die in Essen gegen das Coronavirus geimpft sind)/.match(p.text)
 		unless cases_result.nil?
 			# If we are here, we found a result for cases and we store the numbers 
