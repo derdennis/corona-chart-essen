@@ -47,8 +47,8 @@ page                = Nokogiri::HTML(open(CORONA_UPDATES_IN_ESSEN))
 # Getting todays date in the two required formats
 todays_date_german  = Time.now.strftime("%d.%m.%Y")
 todays_date_iso     = Time.now.strftime("%Y-%m-%d")
-todays_date_german  = "25.02.2022"
-todays_date_iso     = "2022-02-25"
+#todays_date_german  = "25.02.2022"
+#todays_date_iso     = "2022-02-25"
 
 # Getting all paragraphs from the website, stepping through them
 page.css('p').each{ |p|
